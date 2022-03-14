@@ -1,12 +1,3 @@
-<p id="start" align="center">
-<br>
-<a href="#start"><img height="130rem" src="./docs/Screenshot from 2022-02-27 09-41-17.png"></a>
-<br><br>
-<a align="center">Curia is a blockchain-based evidence management system to prevent manipulation in Indian courts.</a>
-<br><br>
-<a>This Decentralized Application can be used to upload evidence by users against any case number. As blockchain technology is used, the data cannot be changed after it has been successfully uploaded to the blockchain network. This creates a digital trail from the collection of evidence at the crime scene, all the way to court</a>
-<h1></h1>
-</p>
 
 <a title="License MIT" href="https://github.com/adhilcodes/Cuira/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"></a>
 <a title="Latest release" href="https://github.com/adhilcodes/Cuira/releases"><img src="https://img.shields.io/github/v/release/xnbox/DeepfakeHTTP?style=flat-square&color=28A745"></a>
