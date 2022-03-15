@@ -1,15 +1,6 @@
 
-<a title="License MIT" href="https://github.com/adhilcodes/Cuira/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"></a>
-<a title="Latest release" href="https://github.com/adhilcodes/Cuira/releases"><img src="https://img.shields.io/github/v/release/xnbox/DeepfakeHTTP?style=flat-square&color=28A745"></a>
-<br>
-<p id="banner" align="center">
-<br>
-<a href="#banner"><img width="98%" src="https://raw.githubusercontent.com/xnbox/DeepfakeHTTP/main/img/text.png" alt="YOUR 100% STATIC DYNAMIC BACKEND"></a>
-<table>
-<tr>
-<td>
-<a href="#banner"><img align="left" src="https://raw.githubusercontent.com/xnbox/DeepfakeHTTP/main/img/image1.png" width="190"></a>
-<h3>How are people using it for?</h3>
+
+
 <ul>
     <li>Users can register a case using details like court id, case description and case start date.</li>
     <li>Using the case id, evidence submission date and evidence description, one can upload the evidence file.</li>
@@ -23,29 +14,15 @@
 </p>
 
 
-<h2>Get started❓</h2>
-
-1. Open [Curia](http://hashir.metainc.in/secureX) in your browser.
-
-2. Login to your MetaMask and add Polygon to your Metamask networks.
-[How to add Polygon network to Metamask?](https://docs.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/)
-
-3. Go to [Polygon Faucet](https://faucet.polygon.technology/) and paste your wallet address to obtain MATIC for testing.
-
-4. Connect Curia website to Metamask.
-
-5. Go ahead and explore Curia.
 
 
 
 <h2>Installing and Running Locally 🛠️</h2>
 
 1. Clone the repository.
-```
-https://github.com/adhilcodes/curia.git
-```
+https://github.com/kiranvinodcgs/BCMS.git
 
-2. Go to the cloned directory (e.g. `cd Curia`).
+2. Go to the cloned directory.
 
 3. Run ```npm install``` to install all the dependencies.
 
@@ -62,7 +39,6 @@ npm run start
 
 8. Connect MetaMask to your localhost.
 
-9. Go ahead and explore Curia.
 
 
 ## Technologies used 💻:
@@ -73,17 +49,4 @@ npm run start
  - IPFS
  - Polygon Chain
  - Alchemy
- 
-## Made with ❤️ by:
-
-  - Contributors in the project:
-
-
-    | SR no     | Description                       |
-    | -------- | --------------------------------- |
-    | 1        | Abdul Adhil PK                    |
-    | 2        | Muhammed Hashir PM                |
-    | 3        | Rosemary Benny                    |
-    | 4        | Neha Susan Manoj                  |
-
 
