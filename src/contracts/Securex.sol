@@ -16,15 +16,37 @@ contract Securex {
         string createdDateTime;
     }
 
+    struct Replication {
+        string description;
+        string fileHash;
+        address owner;
+        uint256 timestamp;
+        string createdDateTime;
+    }
+
     struct Case {
-        string courtId;
         uint256 caseId;
+        string courtId;
         string caseDescription;
         mapping(uint256 => Evidence) evidences;
         uint256 totalEvidences;
         string startDateTime;
         bool initialised;
+        string nature;
+        string defendant;
+        mapping(uint256 => Replication) replication;
+        uint256 totalReplication;
     }
+
+
+    event ReplicationRegistered(
+        string description,
+        string fileHash,
+        address owner,
+        uint256 timestamp,
+        string createdDateTime
+    );
+
     event EvidenceRegistered(
         string description,
         string fileHash,
@@ -34,16 +56,13 @@ contract Securex {
     );
 
     event CaseRegistered(
-        string courtId,
+        string caseId,
         string caseDescription,
-        uint256 totalEvidences,
-        string startDateTime
+        uint256 totalVakalat,
+        string startDateTime,
+        uint256 totalReplication
     );
-    event EvidenceTipped(uint256 tipAmount, address payable author);
-
-    constructor() public {
-        name = "secureX";
-    }
+    
 
     function registerCase(
         string memory _courtId,
@@ -62,10 +81,11 @@ contract Securex {
         newCase.caseId = totalCases;
         newCase.caseDescription = _caseDescription;
         newCase.totalEvidences = 0;
+        newCase.totalReplication=0;
         newCase.startDateTime = _startDateTime;
         newCase.initialised = true;
 
-        emit CaseRegistered(_courtId, _caseDescription, 0, _startDateTime);
+        emit CaseRegistered(_courtId, _caseDescription, 0, _startDateTime,0);
     }
 
     function registerEvidence(
@@ -134,8 +154,5 @@ contract Securex {
         return (evd.description, evd.fileHash, evd.createdDateTime, evd.owner);
     }
 
-    function tipEvidenceOwner(address payable user) public payable {
-        user.transfer(msg.value);
-        emit EvidenceTipped(msg.value, user);
-    }
+    
 }
