@@ -1,23 +1,46 @@
 import Securex from "../artifacts/src/contracts/Securex.sol/Securex.json";
 import React, { Component } from "react";
 import { Card, Button, Form } from "react-bootstrap";
-
 import Navbar from "./Navbar";
 
 import Web3 from "web3";
 import "./App.css";
-import { Routes } from "react-router-dom";
-
-//Declare IPFS
+const IPFS = require("ipfs");
 const ipfsClient = require("ipfs-http-client");
+const OrbitDB = require("orbit-db");
+
+const ipfsOptions = {
+  EXPERIMENTAL: {
+    pubsub: true,
+  },
+};
+
 const ipfs = ipfsClient({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https",
+  host: "localhost",
+  port: 5002,
+  protocol: "http",
 }); // leaving out the arguments will default to these values
 
 class App extends Component {
   async componentWillMount() {
+    const ipfss = await IPFS.create(ipfsOptions);
+    const orbitdb = await OrbitDB.createInstance(ipfss);
+    // const db = await orbitdb.create('users', 'docstore')
+    // const db = await orbitdb.docs('test-docs')
+    const db = await orbitdb.open(
+      "/orbitdb/zdpuAwDV8PVmrHAuKqcaVMzQXLcfRb92mLdj9pjTkzhQDYXS4/user.posts",
+      { localOnly: true },
+    );
+    await db.load();
+    // await db.put({ _id: 1, name: 'shamb0t', followers: 500 })
+    // await db.put({ _id: 2, name: 'shamb0t', followers: 500 })
+    // await db.put({ _id: 2, name: 'shambu', followers: 500 }, { pin: true })
+    const res = db.get("");
+    await db.close();
+    console.log({ res });
+
+    // const value = db.get('hello')
+
     await this.loadWeb3();
     await this.loadBlockchainData();
   }
@@ -45,19 +68,19 @@ class App extends Component {
     const networkId = await web3.eth.net.getId();
     // const networkData = Securex.networks[networkId]
     //const networkAdress = "0xba02375cCBD0beeAa569327CF18FEA409Dc41DAa"
-    const networkAdress = "0x0012934aF61ee4B50081D36ef1A1cA5186f55F22";
+    const networkAdress = "0xA2Fd25d2d667b4efCFf01A35D0984e98984405F9";
     if (networkAdress) {
       const securex = new web3.eth.Contract(Securex.abi, networkAdress);
       this.setState({ securex });
       const caseCount = await securex.methods.totalCases().call();
       this.setState({ caseCount });
       console.log(caseCount);
-      for (var i = 1; i <= caseCount; i++) {
-        const aCase = await securex.methods.cases(i).call();
-        this.setState({
-          cases: [...this.state.cases, aCase],
-        });
-      }
+      // for (var i = 1; i <= caseCount; i++) {
+      //   const aCase = await securex.methods.cases(i).call();
+      //   this.setState({
+      //     cases: [...this.state.cases, aCase],
+      //   });
+      // }
 
       console.log(this.state.cases);
 

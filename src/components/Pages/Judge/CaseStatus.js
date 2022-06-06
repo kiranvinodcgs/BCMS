@@ -15,7 +15,7 @@ const PetitionerForm = ({ title, _id }) => {
           <Button
           className={"ml-auto d-block"}
             onClick={() => {
-              navigate(`/petitioner/${_id}`);
+              navigate(`/judge/${_id}`);
             }}
           >
             View Case

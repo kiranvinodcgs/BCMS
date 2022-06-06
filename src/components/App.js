@@ -8,7 +8,12 @@ import Register from "./Pages/Register";
 import Admin from "./Pages/Admin";
 import AdminEdit from "./Pages/AdminEdit";
 import PetitionerFile from "./Pages/Petitioner/File";
+import PetitionerCase from "./Pages/Petitioner/Case";
 import Petitioner from "./Pages/Petitioner";
+import CourtCase from "./Pages/Court/Case";
+import Court from "./Pages/Court";
+import JudgeCase from "./Pages/Judge/Case";
+import Judge from "./Pages/Judge"
 
 const App = () => {
   return (
@@ -22,7 +27,11 @@ const App = () => {
       <Route path="/curia" element={<Curia />} />
       <Route path="/petitioner/file" element={<PetitionerFile />} />
       <Route path="/petitioner" element={<Petitioner />} />
-
+      <Route path="/petitioner/:id" element={<PetitionerCase />} />
+      <Route path="/court" element={<Court />} />
+      <Route path="/court/:id" element={<CourtCase />} />
+      <Route path="/judge" element={<Judge />} />
+      <Route path="/judge/:id" element={<JudgeCase />} />
     </Routes>
   );
 };

@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Navbar from "../../SharedComponents/Navbar";
 import CaseStatus from "./CaseStatus";
-import { getCaseForUser } from "../../orbit";
+import { getAllCases } from "../../orbit";
 
 const Homepage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = localStorage.getItem("user_id");
-      const data = await getCaseForUser(userId);
+      const data = await getAllCases();
       setData(data);
     };
 
@@ -23,7 +22,7 @@ const Homepage = () => {
       <Container className="mt-5">
         <Row>
           <Col>
-            <h2 className="text-center mt-3 font-weight-bold">File Case</h2>
+            <h2 className="text-center mt-3 font-weight-bold">List Cases</h2>
           </Col>
         </Row>
         <Row className="justify-content-center">
