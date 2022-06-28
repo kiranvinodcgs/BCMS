@@ -55,18 +55,26 @@ const PetitionerForm = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await securex.methods
-        .registerCase(court, description, new Date().toISOString())
-        .send({ from: accounts })
-        .on("transactionHash", (hash) => {
-          file(hash);
-        });
 
-      console.log({ res });
-    } catch (err) {
-      console.log(err);
+    setLoading(true);
+    setError(false);
+
+    if (name && court && nature && defendant && description) {
+      try {
+        const res = await securex.methods
+          .registerCase(court, description, new Date().toISOString())
+          .send({ from: accounts })
+          .on("transactionHash", (hash) => {
+            file(hash);
+          });
+
+        console.log({ res });
+      } catch (err) {
+        console.log(err);
+        setError(true);
+        setLoading(false);
+      }
+    } else {
       setError(true);
       setLoading(false);
     }
@@ -76,6 +84,7 @@ const PetitionerForm = () => {
     const caseCount = await securex.methods.totalCases().call();
     console.log(caseCount);
     const userId = localStorage.getItem("user_id");
+
     try {
       await createCase({
         caseCount: caseCount.toNumber(),
@@ -146,6 +155,9 @@ const PetitionerForm = () => {
           >
             Submit
           </Button>
+          {error && (
+            <Form.Text className="text-danger">Fill all the fields </Form.Text>
+          )}
         </Form>
       </div>
     </>

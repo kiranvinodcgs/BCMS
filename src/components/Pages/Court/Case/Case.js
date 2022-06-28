@@ -1,20 +1,53 @@
-import React, { useState } from "react";
-import { Row, Button, Col, Badge } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Row, Button, Col, Badge, Form } from "react-bootstrap";
+import { getJudges } from "../../../orbit";
 
 const PetitionerForm = ({
   verifyEvidence,
   data,
   verifyReplication,
   verifyVakkalath,
+  updateJudge,
 }) => {
   const src = "http://localhost:9090/ipfs";
+  const [judges, setJudges] = useState([]);
+
+  useEffect(() => {
+    const call = async () => {
+      const res = await getJudges();
+      setJudges(res);
+    };
+    data.court && call();
+  }, [data]);
 
   return (
     <>
       <div className="rounded border m-3 p-4 shadow">
         <h1>{data.name}</h1>
 
+        {data.court && <h4>Court Name :{data.court}</h4>}
+        {data.dependant && <h4>Defendant Name :{data.dependant}</h4>}
+        {data.dependant && <h4>Defendant Name :{data.dependant}</h4>}
+
+        <Form.Group>
+          <Form.Label>Assign Judge</Form.Label>
+          <br />
+          <Form.Select
+            onChange={(e) => updateJudge(e.target.value)}
+            value={data.judge || 1}
+            className="mb-3 w-100"
+          >
+            <option value={0}>"None"</option>,
+            {judges.map(
+              (e) =>
+                e.fullname &&
+                e._id && <option value={e._id}>{e.fullname}</option>,
+            )}
+          </Form.Select>
+        </Form.Group>
+
         <h3>Case Files</h3>
+
         {data &&
           data.files &&
           data.files.map((file) => {

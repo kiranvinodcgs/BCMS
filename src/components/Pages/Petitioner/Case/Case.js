@@ -13,12 +13,21 @@ const PetitionerForm = ({
   const [description, setDescription] = useState();
   const [replicationDescription, setReplicationDescription] = useState();
   const [vakkalathDescription, setVakkalathDescription] = useState();
+
+  const [evidenceError, setEvidenceError] = useState(false);
+  const [replicationError, setReplicationError] = useState(false);
+  const [VakkalathnamaError, setVakkalathnamaError] = useState(false);
+
   const src = "http://localhost:9090/ipfs";
 
   return (
     <>
       <div className="rounded border m-3 p-4 shadow">
         <h1>{data.name}</h1>
+
+        {data.court && <h4>Court Name :{data.court}</h4>}
+        {data.dependant && <h4>Defendant Name :{data.dependant}</h4>}
+        {data.judgeName && <h4>Judge Name :{data.judgeName}</h4>}
 
         <h3>Upload Case Files</h3>
         {data &&
@@ -47,9 +56,18 @@ const PetitionerForm = ({
             );
           })}
 
-        <Form onSubmit={(e) => uploadEvidence(e, file, description)}>
+        <Form
+          onSubmit={(e) => {
+            if (file && description) {
+              uploadEvidence(e, file, description);
+              setEvidenceError(false);
+            } else {
+              setEvidenceError(true);
+            }
+          }}
+        >
           <Form.Group className="mt-2 mb-3">
-            <Form.Label>Upload replication</Form.Label>
+            <Form.Label>Upload case files</Form.Label>
             <Form.Control
               onChange={(e) => setFile(e.target.files[0])}
               type="file"
@@ -63,11 +81,21 @@ const PetitionerForm = ({
             />
           </Form.Group>
           <Button
-            onClick={(e) => uploadEvidence(e, file, description)}
+            onClick={(e) => {
+              if (file && description) {
+                uploadEvidence(e, file, description);
+                setEvidenceError(false);
+              } else {
+                setEvidenceError(true);
+              }
+            }}
             className="w-100 mb-3"
           >
             Submit Case File
           </Button>
+          {evidenceError && (
+            <Form.Text className="text-danger">Fill all the fields </Form.Text>
+          )}
         </Form>
 
         <h3 className={"mt-5"}>Upload Replication</h3>
@@ -97,9 +125,14 @@ const PetitionerForm = ({
           </>
         )}
         <Form
-          onSubmit={(e) =>
-            uploadReplication(e, replication, replicationDescription)
-          }
+          onSubmit={(e) => {
+            if (replication && replicationDescription) {
+              uploadReplication(e, replication, replicationDescription);
+              setReplicationError(false);
+            } else {
+              setReplicationError(true);
+            }
+          }}
         >
           <Form.Group className="mt-2 mb-3">
             <Form.Label>Upload Replication</Form.Label>
@@ -116,13 +149,21 @@ const PetitionerForm = ({
             />
           </Form.Group>
           <Button
-            onClick={(e) =>
-              uploadReplication(e, replication, replicationDescription)
-            }
+            onClick={(e) => {
+              if (replication && replicationDescription) {
+                uploadReplication(e, replication, replicationDescription);
+                setReplicationError(false);
+              } else {
+                setReplicationError(true);
+              }
+            }}
             className="w-100 mb-3"
           >
             Submit Replication
           </Button>
+          {replicationError && (
+            <Form.Text className="text-danger">Fill all the fields </Form.Text>
+          )}
         </Form>
 
         <h3 className={"mt-5"}>Upload Vakkalathnama</h3>
@@ -152,9 +193,14 @@ const PetitionerForm = ({
           </>
         )}
         <Form
-          onSubmit={(e) =>
-            uploadReplication(e, vakkalath, vakkalathDescription)
-          }
+          onSubmit={(e) => {
+            if (vakkalath && vakkalathDescription) {
+              uploadVakkalath(e, vakkalath, vakkalathDescription);
+              setVakkalathnamaError(false);
+            } else {
+              setVakkalathnamaError(true);
+            }
+          }}
         >
           <Form.Group className="mt-2 mb-3">
             <Form.Label>Upload Replication</Form.Label>
@@ -171,18 +217,28 @@ const PetitionerForm = ({
             />
           </Form.Group>
           <Button
-            onClick={(e) => uploadVakkalath(e, vakkalath, vakkalathDescription)}
+            onClick={(e) => {
+              if (vakkalath && vakkalathDescription) {
+                uploadVakkalath(e, vakkalath, vakkalathDescription);
+                setVakkalathnamaError(false);
+              } else {
+                setVakkalathnamaError(true);
+              }
+            }}
             className="w-100 mb-3"
           >
-            Submit Replication
+            Submit Vakkalath
           </Button>
+          {VakkalathnamaError && (
+            <Form.Text className="text-danger">Fill all the fields </Form.Text>
+          )}
         </Form>
 
         <h3 className={"mt-5"}>Statement</h3>
         {data && data.statement ? (
           <>
             <img
-              src={`${src}/${data.vakkalath.path}`}
+              src={`${src}/${data.statement.path}`}
               className="w-100"
               alt=""
             />

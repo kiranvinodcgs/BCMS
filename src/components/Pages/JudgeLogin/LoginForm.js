@@ -16,20 +16,20 @@ const Homepage = () => {
     setError(false);
     try {
       await loginJudge({ email, password });
+      setLoading(false);
+      navigate("/judge");
     } catch (err) {
       console.log(err);
       setError(true);
       setLoading(false);
     }
-    setLoading(false);
-    navigate("/judge");
   };
 
   return (
     <>
       <div className="rounded border m-3 p-4 shadow">
         <Form onSubmit={register} className="">
-          <h5 className="text-center w-100">Court Official Login</h5>
+          <h5 className="text-center w-100">Judge Login</h5>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -50,6 +50,11 @@ const Homepage = () => {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me" />
           </Form.Group>
+          {error && (
+            <Form.Text className="text-danger">
+              Error! Invalid Credentials
+            </Form.Text>
+          )}
           <Button onClick={register} variant="primary w-100" type="submit">
             Submit
           </Button>

@@ -6,7 +6,7 @@ import CourtLogin from "./Pages/CourtLogin";
 import JudgeLogin from "./Pages/JudgeLogin";
 import Register from "./Pages/Register";
 import Admin from "./Pages/Admin";
-import AdminEdit from "./Pages/AdminEdit";
+import AdminCreate from "./Pages/AdminCreate";
 import PetitionerFile from "./Pages/Petitioner/File";
 import PetitionerCase from "./Pages/Petitioner/Case";
 import Petitioner from "./Pages/Petitioner";
@@ -23,7 +23,7 @@ const App = () => {
       <Route path="/login/judge" element={<JudgeLogin />} />
       <Route path="/register" element={<Register />} />
       <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/edit" element={<AdminEdit />} />
+      <Route path="/admin/create" element={<AdminCreate />} />
       <Route path="/curia" element={<Curia />} />
       <Route path="/petitioner/file" element={<PetitionerFile />} />
       <Route path="/petitioner" element={<Petitioner />} />

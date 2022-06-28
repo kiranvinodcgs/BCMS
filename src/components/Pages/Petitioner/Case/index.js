@@ -76,6 +76,7 @@ const Homepage = () => {
         }
 
         setLoading(true);
+        console.log("here");
 
         securex.methods
           .registerEvidence(

@@ -16,13 +16,13 @@ const Homepage = () => {
     setError(false);
     try {
       await loginCourt({ email, password });
+      setLoading(false);
+      navigate("/court");
     } catch (err) {
       console.log(err);
       setError(true);
       setLoading(false);
     }
-    setLoading(false);
-    navigate("/court");
   };
 
   return (
@@ -50,6 +50,11 @@ const Homepage = () => {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me" />
           </Form.Group>
+          {error && (
+            <Form.Text className="text-danger">
+              Error! Invalid Credentials
+            </Form.Text>
+          )}
           <Button onClick={register} variant="primary w-100" type="submit">
             Submit
           </Button>

@@ -11,7 +11,7 @@ const Homepage = () => {
         <Row>
           <Col>
             <h1 className="text-center mt-3 font-weight-bold">
-              Edit User
+              Create User
             </h1>
           </Col>
         </Row>

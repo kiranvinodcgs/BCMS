@@ -4,6 +4,7 @@ import { Row, Button, Col, Badge, Form } from "react-bootstrap";
 const PetitionerForm = ({ data, uploadStatement }) => {
   const [statement, setStatement] = useState();
   const [statementDescription, setStatementDescription] = useState();
+  const [error, setError] = useState(false);
 
   const src = "http://localhost:9090/ipfs";
 
@@ -11,6 +12,10 @@ const PetitionerForm = ({ data, uploadStatement }) => {
     <>
       <div className="rounded border m-3 p-4 shadow">
         <h1>{data.name}</h1>
+
+        {data.court && <h4>Court Name :{data.court}</h4>}
+        {data.dependant && <h4>Defendant Name :{data.dependant}</h4>}
+        {data.nature && <h4>Nature :{data.nature}</h4>}
 
         <h3>Case Files</h3>
         {data &&
@@ -110,7 +115,14 @@ const PetitionerForm = ({ data, uploadStatement }) => {
           </>
         )}
         <Form
-          onSubmit={(e) => uploadStatement(e, statement, statementDescription)}
+          onSubmit={(e) => {
+            if (statement && statementDescription) {
+              uploadStatement(e, statement, statementDescription);
+              setError(false);
+            } else {
+              setError(true);
+            }
+          }}
         >
           <Form.Group className="mt-2 mb-3">
             <Form.Label>Upload Statement</Form.Label>
@@ -127,11 +139,21 @@ const PetitionerForm = ({ data, uploadStatement }) => {
             />
           </Form.Group>
           <Button
-            onClick={(e) => uploadStatement(e, statement, statementDescription)}
+            onClick={(e) => {
+              if (statement && statementDescription) {
+                uploadStatement(e, statement, statementDescription);
+                setError(false);
+              } else {
+                setError(true);
+              }
+            }}
             className="w-100 mb-3"
           >
             Submit statement
           </Button>
+          {error && (
+            <Form.Text className="text-danger">Fill all the fields </Form.Text>
+          )}
         </Form>
       </div>
     </>

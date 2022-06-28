@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Navbar from "../../SharedComponents/Navbar";
 import CaseStatus from "./CaseStatus";
-import { getAllCases } from "../../orbit";
+import { getCaseForJudge } from "../../orbit";
 
 const Homepage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllCases();
+      const data = await getCaseForJudge();
       setData(data);
     };
 

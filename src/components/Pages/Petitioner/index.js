@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Navbar from "../../SharedComponents/Navbar";
 import CaseStatus from "./CaseStatus";
 import { getCaseForUser } from "../../orbit";
+import { useNavigate } from "react-router-dom"
 
 const Homepage = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +27,11 @@ const Homepage = () => {
           <Col>
             <h2 className="text-center mt-3 font-weight-bold">File Case</h2>
           </Col>
+        </Row>
+        <Row>
+          <div className="ml-auto mr-auto">
+            <Button variant={"success"} onClick={() => navigate("/petitioner/file")}>File new case</Button>
+          </div>
         </Row>
         <Row className="justify-content-center">
           <Col md={6}>

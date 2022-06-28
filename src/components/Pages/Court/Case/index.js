@@ -10,6 +10,7 @@ import {
   verifyEvidenceDb,
   verifyVakkalathDb,
   verifyReplicationDb,
+  addJudge,
 } from "../../../orbit";
 const ipfsClient = require("ipfs-http-client");
 
@@ -79,6 +80,11 @@ const Homepage = () => {
     setData(res);
   };
 
+  const updateJudge = async (value) => {
+    const res = await addJudge(id, value);
+    setData(res);
+  };
+
   return (
     <>
       <Navbar account={accounts} />
@@ -94,6 +100,7 @@ const Homepage = () => {
               verifyEvidence={verifyEvidence}
               verifyReplication={verifyReplication}
               verifyVakkalath={verifyVakkalath}
+              updateJudge={updateJudge}
               data={data}
             />
           </Col>
